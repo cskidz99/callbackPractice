@@ -1,16 +1,16 @@
 /* In this repo your job is to write functions to make each function call work properly.
-Below is a sample problem 
+Below is a sample problem
 
   //code here for sayHi
 
    sayHi('Hi Katie', function(thingToSay){
       alert(thingToSay);
    });
-   
 
-and what you should write is the sayHi function that makes the code above work, 
-    
-    
+
+and what you should write is the sayHi function that makes the code above work,
+
+
    var sayHi = function(str, cb){
     cb(str);
    }
@@ -18,18 +18,20 @@ and what you should write is the sayHi function that makes the code above work,
    sayHi('Hi Katie', function(thingToSay){
       alert(thingToSay); //should alert ('Hi Katie')'
    });
-    
-    
+
+
 */
 
 
 
   //Code Here for first
-  
+var first = function(arr, cb){
+  return cb(arr[0]);
+};
 
 var names = ['Tyler', 'Cahlan', 'Ryan', 'Colt', 'Tyler', 'Blaine', 'Cahlan'];
 first(names, function(firstName){
-  console.log('The first name in names is ' + firstName)
+  console.log('The first name in names is ' + firstName);
 });
 
 
@@ -40,6 +42,10 @@ first(names, function(firstName){
 
 
   //Code Here for last
+var last = function(arr,cb){
+  return cb(arr[arr.length-1]);
+};
+
 
 last(names, function(lastName){
   console.log('The last name in names is ' + lastName);
@@ -57,10 +63,14 @@ last(names, function(lastName){
 
 
   //Code Here for multiply
+var multiply = function(num1, num2, cb){
+  return cb(num1 * num2);
+};
+
 
 multiply(4, 3, function(answer){
   console.log('The answer is ' + answer); //should console.log 12
-})
+});
 
 
 
@@ -73,6 +83,18 @@ multiply(4, 3, function(answer){
 
 
   //Code Here for contains
+function contains(arr, str, cb) {
+  // return cb(arr.indexOf(str) > -1);
+
+
+  for (var i = 0; i < arr.length; i++) {
+    if (arr[i] === str) {
+      return cb(true);
+    }
+  }
+  return cb(false);
+}
+
 
 contains(names, 'Colt', function(result){
   if(result === true){
@@ -92,6 +114,17 @@ contains(names, 'Colt', function(result){
 
 
     //Code Here for uniq
+var uniq = function(arr, cb) {
+  var newArr = [];
+  var sortArr = arr.sort();
+  for (var i = 0; i < sortArr.length; i++) {
+    if (arr[i] !== arr[i+1]) {
+      newArr.push(arr[i]);
+    }
+  }
+  return cb(newArr);
+};
+
 
 uniq(names, function(uniqArr){
   console.log('The new names array with all the duplicate items removed is ', uniqArr);
@@ -108,13 +141,15 @@ uniq(names, function(uniqArr){
 
     //Code Here for each
 
+var each = function(arr, cb) {
+  for (var i = 0; i < arr.length; i++) {
+    cb(arr[i], i);
+  }
+};
+
 each(names, function(item, indice){
   console.log('The item in the ' + indice + ' position is ' + item)
 });
-
-
-
-
 
 /* NEXT PROBLEM ---- NEXT PROBLEM ---- NEXT PROBLEM ---- NEXT PROBLEM */
 
@@ -123,6 +158,14 @@ each(names, function(item, indice){
 
 
  //code here for getUserById
+
+function getUserById(obj, id, cb) {
+  for (var i = 0; i < obj.length; i++) {
+    if (obj[i].id === id) {
+      cb(obj[i]);
+    }
+  }
+}
 
 var users = [
   {
@@ -146,5 +189,5 @@ var users = [
 ];
 
 getUserById(users, '16t', function(user){
-  console.log('The user with the id 16t has the email of ' + user.email + ' the name of ' + user.name + ' and the address of ' + user.address); 
+  console.log('The user with the id 16t has the email of ' + user.email + ' the name of ' + user.name + ' and the address of ' + user.address);
 });
